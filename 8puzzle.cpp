@@ -18,10 +18,10 @@ bool canUp(node* n);
 bool canDown(node* n);
 bool canRight(node* n);
 bool canLeft(node* n);
-node* up(node* n);
-node* right(node* n);
-node* down(node* n);
-node* left(node* n);
+node* moveUp(node* n);
+node* moveRight(node* n);
+node* moveDown(node* n);
+node* moveLeft(node* n);
 
 node* start(node* goal);
 int createNodes(node* father,  int n);
@@ -63,7 +63,7 @@ int createNodes(node* father, int n) {
 	if (canUp(father)) {
 		node* son1 = NULL;
 		son1 = (node*)malloc(sizeof(node));
-		son1 = up(father);
+		son1 = moveUp(father);
 		naux++;
 		son1->num = naux;
 		father->next1 = son1;
@@ -73,7 +73,7 @@ int createNodes(node* father, int n) {
 	if (canRight(father)) {
 		node* son2 = NULL;
 		son2 = (node*)malloc(sizeof(node));
-		son2 = right((node*)father);
+		son2 = moveRight((node*)father);
 		naux++;
 		son2->num = naux;
 		father->next2 = son2;
@@ -84,7 +84,7 @@ int createNodes(node* father, int n) {
 	if (canDown(father)) {
 		node* son3 = NULL;
 		son3 = (node*)malloc(sizeof(node));
-		son3 = down(father);
+		son3 = moveDown(father);
 		naux++;
 		son3->num = naux;
 		father->next3 = son3;
@@ -95,7 +95,7 @@ int createNodes(node* father, int n) {
 	if (canLeft(father)) {
 		node* son4 = NULL;
 		son4 = (node*)malloc(sizeof(node));
-		son4 = left(father);
+		son4 = moveLeft(father);
 		naux++;
 		son4->num = naux;
 		father->next4 = son4;
@@ -113,7 +113,7 @@ bool canUp(node* n) {
 			}
 		}
 	}
-	if (y == 0) { return false; }
+	if (y == 2) { return false; }
 	else { return true; }
 }
 bool canDown(node* n) {
@@ -125,19 +125,7 @@ bool canDown(node* n) {
 			}
 		}
 	}
-	if (y == 2) { return false; }
-	else { return true; }
-}
-bool canRight(node* n) {
-	int x;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			if (n->state[i][j] == 0) {
-				x = j;
-			}
-		}
-	}
-	if (x == 2) { return false; }
+	if (y == 0) { return false; }
 	else { return true; }
 }
 bool canLeft(node* n) {
@@ -149,10 +137,22 @@ bool canLeft(node* n) {
 			}
 		}
 	}
+	if (x == 2) { return false; }
+	else { return true; }
+}
+bool canRight(node* n) {
+	int x;
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (n->state[i][j] == 0) {
+				x = j;
+			}
+		}
+	}
 	if (x == 0) { return false; }
 	else { return true; }
 }
-node* up(node* n) {
+node* moveDown(node* n) {
 	node* temp = NULL;
 	temp = (node*)malloc(sizeof(node));
 	int aux, x, y;
@@ -170,7 +170,7 @@ node* up(node* n) {
 	temp->state[y][x] = aux;
 	return temp;
 }
-node* down(node* n) {
+node* moveUp(node* n) {
 	node* temp = NULL;
 	temp = (node*)malloc(sizeof(node));
 	int aux, x, y;
@@ -188,7 +188,7 @@ node* down(node* n) {
 	temp->state[y][x] = aux;
 	return temp;
 }
-node* right(node* n) {
+node* moveLeft(node* n) {
 	node* temp = NULL;
 	temp = (node*)malloc(sizeof(node));
 	int aux, x, y;
@@ -206,7 +206,7 @@ node* right(node* n) {
 	temp->state[y][x] = aux;
 	return temp;
 }
-node* left(node* n) {
+node* moveRight(node* n) {
 	node* temp = NULL;
 	temp = (node*)malloc(sizeof(node));
 	int aux, x, y;
