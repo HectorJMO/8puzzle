@@ -223,16 +223,16 @@ def export(frontier, time):
 
     moves = backtrace()
 
-    file = open('output.txt', 'w')
-    file.write("path_to_goal: " + str(moves))
-    file.write("\ncost_of_path: " + str(len(moves)))
-    file.write("\nnodes_expanded: " + str(nodes_expanded))
-    file.write("\nfringe_size: " + str(len(frontier)))
-    file.write("\nmax_fringe_size: " + str(max_frontier_size))
-    file.write("\nsearch_depth: " + str(goal_node.depth))
-    file.write("\nmax_search_depth: " + str(max_search_depth))
-    file.write("\nrunning_time: " + format(time, '.8f'))
-    file.write("\nmax_ram_usage: " + format(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1000.0, '.8f'))    
+    file = open('resultados.txt', 'w')
+    file.write("Movimientos: " + str(moves))
+    file.write("\nCosto: " + str(len(moves)))
+    file.write("\nNodos explorados: " + str(nodes_expanded))
+    file.write("\nMargen: " + str(len(frontier)))
+    file.write("\nMargen max: " + str(max_frontier_size))
+    file.write("\nProfundidad: " + str(goal_node.depth))
+    file.write("\nProfundidad max: " + str(max_search_depth))
+    file.write("\nTiempo: " + format(time, '.8f'))
+    file.write("\nUso de RAM: " + format(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1000.0, '.8f'))    
     file.close()
 
 
@@ -273,7 +273,8 @@ def main():
 
 function_map = {
     'bfs': bfs,
-    'dfs': dfs
+    'dfs': dfs,
+    'dls_mod': dls_mod
 }
 
 if __name__ == '__main__':
